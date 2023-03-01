@@ -6,7 +6,6 @@ let getHomePage = (req, res) => {
 
 let postWebhook = (req, res) => {
   let body = req.body;
-  console.log(body);
   console.log(`\u{1F7EA} Received webhook:`);
   console.dir(body, { depth: null });
 
@@ -20,11 +19,11 @@ let postWebhook = (req, res) => {
       let sender_psid = webhook_event.sender.id;
       console.log("Sender PSID: " + sender_psid);
 
-      if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);
-      } else if (webhook_event.postback) {
-        handlePostback(sender_psid, webhook_event.postback);
-      }
+      // if (webhook_event.message) {
+      //   handleMessage(sender_psid, webhook_event.message);
+      // } else if (webhook_event.postback) {
+      //   handlePostback(sender_psid, webhook_event.postback);
+      // }
     });
     res.status(200).send("EVENT_RECEIVED");
 
