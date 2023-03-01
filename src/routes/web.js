@@ -8,7 +8,7 @@ let initWebRoutes = (app) => {
 
   router.post("/webhook", HomeController.postWebhook);
   router.get("/webhook", HomeController.getWebhook);
-  router.post("/test", HomeController.test);
+
   router.post("/about", (req, res) => {
     let a = req.body;
     console.log(a);
