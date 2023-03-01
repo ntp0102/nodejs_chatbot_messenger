@@ -10,7 +10,7 @@ let postWebhook = (req, res) => {
   console.log(`\u{1F7EA} Received webhook:`);
   console.dir(body, { depth: null });
 
-  if (body.object === "page") {
+  if (body && body.object === "page") {
     res.status(200).send("EVENT_RECEIVED");
 
     // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
@@ -28,7 +28,7 @@ let getWebhook = (req, res) => {
   // Check if a token and mode is in the query string of the request
   if (mode && token) {
     // Check the mode and token sent is correct
-    if (mode === "subscribe" && token === config.VERIFY_TOKEN) {
+    if (mode === "subscribe" && token === process.env.VERIFY_TOKEN) {
       // Respond with the challenge token from the request
       console.log("WEBHOOK_VERIFIED");
       res.status(200).send(challenge);
@@ -39,8 +39,15 @@ let getWebhook = (req, res) => {
   }
 };
 
+let test = (req, res) => {
+  let body = req.body;
+  console.log("check", body);
+  return res.send(body);
+};
+
 module.exports = {
   getHomePage: getHomePage,
   postWebhook: postWebhook,
   getWebhook: getWebhook,
+  test: test,
 };
